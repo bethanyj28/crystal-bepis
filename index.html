@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crystal Bepis - You've Never Seen a Taste Like This</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bangers&family=Press+Start+2P&family=Oswald:wght@400;700&display=swap');
+
+    :root {
+      --bepis-red: #E32636;
+      --bepis-blue: #004B93;
+      --bepis-light-blue: #0070C0;
+      --crystal-white: #f0f4ff;
+      --silver: #C0C0C0;
+      --dark: #0a0a1a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--dark);
+      color: white;
+      font-family: 'Oswald', Arial, sans-serif;
+      overflow-x: hidden;
+      cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="%23E32636" opacity="0.7"/><circle cx="12" cy="12" r="4" fill="white"/></svg>') 12 12, auto;
+    }
+
+    /* ===== STARFIELD BACKGROUND ===== */
+    .starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.2; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.5); }
+    }
+
+    /* ===== MARQUEE BAR ===== */
+    .marquee-bar {
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(90deg, var(--bepis-red), var(--bepis-blue), var(--bepis-red));
+      padding: 8px 0;
+      overflow: hidden;
+      border-bottom: 3px solid var(--silver);
+    }
+
+    .marquee-text {
+      display: inline-block;
+      white-space: nowrap;
+      animation: marquee 20s linear infinite;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: white;
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(100vw); }
+      100% { transform: translateX(-200%); }
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(0,75,147,0.4) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 100%, rgba(227,38,54,0.3) 0%, transparent 60%),
+        var(--dark);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(255,255,255,0.02) 2px,
+          rgba(255,255,255,0.02) 4px
+        );
+      pointer-events: none;
+    }
+
+    .logo-container {
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .logo-container img {
+      width: min(500px, 80vw);
+      filter: drop-shadow(0 0 30px rgba(0,112,192,0.6)) drop-shadow(0 0 60px rgba(227,38,54,0.4));
+      animation: logo-pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes logo-pulse {
+      0%, 100% { filter: drop-shadow(0 0 30px rgba(0,112,192,0.6)) drop-shadow(0 0 60px rgba(227,38,54,0.4)); }
+      50% { filter: drop-shadow(0 0 50px rgba(0,112,192,0.9)) drop-shadow(0 0 80px rgba(227,38,54,0.7)); }
+    }
+
+    .starburst {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      top: -30px;
+      right: -60px;
+      background: var(--bepis-red);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: spin-slow 20s linear infinite;
+      z-index: 2;
+    }
+
+    .starburst span {
+      font-family: 'Bangers', cursive;
+      font-size: 20px;
+      color: white;
+      text-align: center;
+      line-height: 1.1;
+      animation: spin-slow 20s linear infinite reverse;
+      text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+    }
+
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .tagline {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #fff 0%, var(--silver) 50%, #fff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+      letter-spacing: 3px;
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--silver);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 18px 50px;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: white;
+      background: linear-gradient(180deg, var(--bepis-blue) 0%, #002d5a 100%);
+      border: 3px solid var(--silver);
+      border-radius: 0;
+      cursor: pointer;
+      text-decoration: none;
+      position: relative;
+      transition: all 0.2s;
+      box-shadow:
+        0 4px 0 #001a33,
+        0 8px 20px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+
+    .cta-button:hover {
+      background: linear-gradient(180deg, var(--bepis-red) 0%, #8b0000 100%);
+      transform: translateY(-2px);
+      box-shadow:
+        0 6px 0 #4a0000,
+        0 12px 30px rgba(227,38,54,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+
+    .cta-button:active {
+      transform: translateY(2px);
+      box-shadow:
+        0 2px 0 #001a33,
+        0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    /* ===== DIVIDER ===== */
+    .divider {
+      position: relative;
+      z-index: 1;
+      height: 6px;
+      background: linear-gradient(90deg, var(--bepis-red), var(--bepis-blue), var(--bepis-red));
+      box-shadow: 0 0 20px rgba(0,112,192,0.5);
+    }
+
+    /* ===== ABOUT SECTION ===== */
+    .about {
+      position: relative;
+      z-index: 1;
+      padding: 80px 20px;
+      background:
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 40px,
+          rgba(227,38,54,0.03) 40px,
+          rgba(227,38,54,0.03) 80px
+        ),
+        linear-gradient(180deg, #0a0a2e, var(--dark));
+      text-align: center;
+    }
+
+    .section-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--bepis-red), var(--bepis-blue));
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .about-card {
+      background: linear-gradient(180deg, rgba(0,75,147,0.15), rgba(0,0,0,0.3));
+      border: 2px solid rgba(0,112,192,0.3);
+      padding: 40px 30px;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .about-card:hover {
+      border-color: var(--bepis-red);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 40px rgba(227,38,54,0.2);
+    }
+
+    .about-card .icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .about-card h3 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      color: var(--bepis-red);
+      margin-bottom: 12px;
+    }
+
+    .about-card p {
+      color: var(--silver);
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    /* ===== FLAVOR SECTION ===== */
+    .flavors {
+      position: relative;
+      z-index: 1;
+      padding: 80px 20px;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(227,38,54,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(0,75,147,0.1) 0%, transparent 50%),
+        var(--dark);
+      text-align: center;
+    }
+
+    .flavor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .flavor-card {
+      padding: 30px 20px;
+      border: 2px solid var(--silver);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.2));
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .flavor-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .flavor-card:hover::before {
+      left: 100%;
+    }
+
+    .flavor-card:hover {
+      border-color: var(--bepis-red);
+      transform: scale(1.05);
+    }
+
+    .flavor-card .flavor-icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .flavor-card h3 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .flavor-card p {
+      font-size: 0.85rem;
+      color: var(--silver);
+    }
+
+    .flavor-card.crystal h3 { color: #a8d8ea; }
+    .flavor-card.original h3 { color: var(--bepis-red); }
+    .flavor-card.zero h3 { color: var(--silver); }
+    .flavor-card.max h3 { color: var(--bepis-light-blue); }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials {
+      position: relative;
+      z-index: 1;
+      padding: 80px 20px;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 60px,
+          rgba(0,75,147,0.03) 60px,
+          rgba(0,75,147,0.03) 120px
+        ),
+        linear-gradient(180deg, #0a0a2e, var(--dark));
+      text-align: center;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .testimonial {
+      background: rgba(255,255,255,0.03);
+      border-left: 4px solid var(--bepis-red);
+      padding: 30px;
+      text-align: left;
+      font-style: italic;
+      color: var(--silver);
+      line-height: 1.6;
+    }
+
+    .testimonial .author {
+      font-style: normal;
+      font-weight: 700;
+      color: var(--bepis-light-blue);
+      margin-top: 15px;
+      display: block;
+      font-size: 0.9rem;
+    }
+
+    /* ===== RETRO COUNTER ===== */
+    .counter-section {
+      position: relative;
+      z-index: 1;
+      padding: 40px 20px;
+      text-align: center;
+      background: var(--dark);
+    }
+
+    .visitor-counter {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: black;
+      border: 2px inset var(--silver);
+      padding: 8px 16px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      color: #00ff00;
+    }
+
+    .webring {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .webring img,
+    .webring-badge {
+      height: 31px;
+      image-rendering: pixelated;
+    }
+
+    .webring-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0 10px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      background: linear-gradient(180deg, var(--silver), #888);
+      color: black;
+      border: 2px outset var(--silver);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    /* ===== NEWSLETTER ===== */
+    .newsletter {
+      position: relative;
+      z-index: 1;
+      padding: 60px 20px;
+      text-align: center;
+      background:
+        linear-gradient(180deg, var(--dark), #0a0a2e);
+    }
+
+    .newsletter h2 {
+      font-family: 'Bangers', cursive;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      color: var(--bepis-red);
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    .newsletter p {
+      color: var(--silver);
+      margin-bottom: 25px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 14px 16px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      border: 2px solid var(--silver);
+      border-right: none;
+      background: rgba(255,255,255,0.05);
+      color: white;
+      outline: none;
+    }
+
+    .newsletter-form input::placeholder {
+      color: #666;
+    }
+
+    .newsletter-form input:focus {
+      border-color: var(--bepis-light-blue);
+      background: rgba(0,112,192,0.1);
+    }
+
+    .newsletter-form button {
+      padding: 14px 28px;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: linear-gradient(180deg, var(--bepis-red), #8b0000);
+      color: white;
+      border: 2px solid var(--bepis-red);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .newsletter-form button:hover {
+      background: linear-gradient(180deg, #ff3347, var(--bepis-red));
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 30px 20px;
+      text-align: center;
+      background: #050510;
+      border-top: 3px solid var(--bepis-blue);
+    }
+
+    footer p {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 9px;
+      color: #555;
+      line-height: 2;
+    }
+
+    footer .footer-links {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      color: var(--bepis-light-blue);
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+
+    footer a:hover {
+      color: var(--bepis-red);
+      text-decoration: underline;
+    }
+
+    /* ===== BUBBLES ANIMATION ===== */
+    .bubble {
+      position: fixed;
+      bottom: -20px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      animation: rise linear infinite;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.6;
+      }
+      50% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(-110vh) translateX(40px);
+        opacity: 0;
+      }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .starburst {
+        width: 120px;
+        height: 120px;
+        top: -20px;
+        right: -30px;
+      }
+      .starburst span {
+        font-size: 14px;
+      }
+      .newsletter-form {
+        flex-direction: column;
+      }
+      .newsletter-form input {
+        border-right: 2px solid var(--silver);
+        border-bottom: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Starfield -->
+  <div class="starfield" id="starfield"></div>
+
+  <!-- Bubbles -->
+  <div id="bubbles"></div>
+
+  <!-- Marquee -->
+  <div class="marquee-bar">
+    <span class="marquee-text">
+      &#9733; CRYSTAL BEPIS &#9733; YOU'VE NEVER SEEN A TASTE LIKE THIS &#9733;
+      CRYSTAL CLEAR REFRESHMENT &#9733; NOW AVAILABLE IN YOUR DIMENSION &#9733;
+      DRINK BEPIS &#9733; THE CHOICE OF A NEW GENERATION &#9733;
+      CRYSTAL BEPIS &#9733; RIGHT NOW &#9733;
+    </span>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="logo-container">
+      <img src="logo.png" alt="Crystal Bepis">
+      <div class="starburst">
+        <span>NEW!<br>CLEAR<br>COLA</span>
+      </div>
+    </div>
+    <h1 class="tagline">You've Never Seen<br>a Taste Like This</h1>
+    <p class="subtitle">Crystal Clear Refreshment</p>
+    <a href="#flavors" class="cta-button">Experience Bepis</a>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- About -->
+  <section class="about">
+    <h2 class="section-title">Why Crystal Bepis?</h2>
+    <div class="about-grid">
+      <div class="about-card">
+        <span class="icon">&#10024;</span>
+        <h3>Crystal Clear</h3>
+        <p>No artificial colors. No murky mysteries. Just pure, transparent refreshment you can see right through. Literally.</p>
+      </div>
+      <div class="about-card">
+        <span class="icon">&#9889;</span>
+        <h3>Maximum Taste</h3>
+        <p>Scientifically formulated by flavor scientists in a secret underground lab to deliver 200% more bepis per sip.</p>
+      </div>
+      <div class="about-card">
+        <span class="icon">&#127776;</span>
+        <h3>Retro Cool</h3>
+        <p>Born in the 90s. Reborn for today. Crystal Bepis is the cola that time forgot and the internet remembered.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Flavors -->
+  <section class="flavors" id="flavors">
+    <h2 class="section-title">Choose Your Bepis</h2>
+    <div class="flavor-grid">
+      <div class="flavor-card crystal">
+        <div class="flavor-icon">&#128167;</div>
+        <h3>Crystal</h3>
+        <p>The original clear cola. See the future.</p>
+      </div>
+      <div class="flavor-card original">
+        <div class="flavor-icon">&#127866;</div>
+        <h3>Original</h3>
+        <p>Classic bepis. Bold. Blue. Beautiful.</p>
+      </div>
+      <div class="flavor-card zero">
+        <div class="flavor-icon">&#9898;</div>
+        <h3>Zero</h3>
+        <p>All the bepis. None of the guilt.</p>
+      </div>
+      <div class="flavor-card max">
+        <div class="flavor-icon">&#9889;</div>
+        <h3>Max</h3>
+        <p>For those who demand maximum bepis.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <h2 class="section-title">What They're Saying</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        "I replaced all my beverages with Crystal Bepis. My doctor says I'm 'translucent' now. I think that's a compliment."
+        <span class="author">&mdash; satisfied_customer_42</span>
+      </div>
+      <div class="testimonial">
+        "I can see through this cola. I can see through lies. Crystal Bepis opened my third eye. 5 stars."
+        <span class="author">&mdash; bepis_connoisseur</span>
+      </div>
+      <div class="testimonial">
+        "My refrigerator used to be full of inferior beverages. Now it's wall-to-wall Bepis. My family is concerned but supportive."
+        <span class="author">&mdash; xX_bepislord_Xx</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <h2>Join the Bepis Revolution</h2>
+    <p>Subscribe and receive exclusive Crystal Bepis updates, coupons, and interdimensional flavor announcements.</p>
+    <form class="newsletter-form" onsubmit="event.preventDefault(); this.innerHTML='<p style=\'color: var(--bepis-light-blue); font-family: Archivo Black; font-size: 1.2rem; padding: 14px;\'>WELCOME TO BEPIS &#10003;</p>';">
+      <input type="email" placeholder="your@email.com" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- Visitor Counter -->
+  <section class="counter-section">
+    <div class="visitor-counter">
+      <span>VISITORS:</span>
+      <span id="counter">0000000</span>
+    </div>
+    <div class="webring">
+      <span class="webring-badge">&lt; PREV</span>
+      <span class="webring-badge">BEPIS WEBRING</span>
+      <span class="webring-badge">NEXT &gt;</span>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="#">Home</a>
+      <a href="#flavors">Flavors</a>
+      <a href="#">Bepis FAQ</a>
+      <a href="#">Contact Bepis HQ</a>
+      <a href="#">Guestbook</a>
+    </div>
+    <p><br>&copy; 1993-2026 Crystal Bepis Inc.<br>All rights reserved.<br><br>Best viewed with Netscape Navigator 4.0+<br>at 800x600 resolution</p>
+  </footer>
+
+  <script>
+    // Create starfield
+    (function() {
+      const sf = document.getElementById('starfield');
+      for (let i = 0; i < 80; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        const size = Math.random() * 3 + 1;
+        star.style.cssText = `
+          width: ${size}px;
+          height: ${size}px;
+          top: ${Math.random() * 100}%;
+          left: ${Math.random() * 100}%;
+          animation-delay: ${Math.random() * 3}s;
+          animation-duration: ${Math.random() * 3 + 2}s;
+        `;
+        sf.appendChild(star);
+      }
+    })();
+
+    // Create bubbles
+    (function() {
+      const container = document.getElementById('bubbles');
+      function spawnBubble() {
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        const size = Math.random() * 12 + 4;
+        bubble.style.cssText = `
+          width: ${size}px;
+          height: ${size}px;
+          left: ${Math.random() * 100}%;
+          animation-duration: ${Math.random() * 6 + 6}s;
+          animation-delay: ${Math.random() * 2}s;
+        `;
+        container.appendChild(bubble);
+        setTimeout(() => bubble.remove(), 14000);
+      }
+      setInterval(spawnBubble, 500);
+    })();
+
+    // Visitor counter
+    (function() {
+      const el = document.getElementById('counter');
+      let count = Math.floor(Math.random() * 900000) + 100000;
+      el.textContent = String(count).padStart(7, '0');
+      setInterval(() => {
+        count += Math.floor(Math.random() * 3) + 1;
+        el.textContent = String(count).padStart(7, '0');
+      }, 3000);
+    })();
+  </script>
+</body>
+</html>
